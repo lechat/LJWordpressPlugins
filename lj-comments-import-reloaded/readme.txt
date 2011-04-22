@@ -1,5 +1,5 @@
 === LJ comments import: reloaded ===
-Contributors: etspring
+Contributors: etspring, lechat
 Donate link: 
 Tags: comments, livejournal, import, crosspost, synchronize
 Requires at least: 2.3
@@ -36,6 +36,10 @@ Note 3: You should consider removing `Reply` link for imported comments, because
 7. Press the `Sync Livejournal comments now` button to do the initial comments synchronization.
 
 == Changelog ==
+
+= 0.98.0 =
+Now works correctly with results of original Wordpress LJ import plugin.
+Added ability to identify livejournal friends incorrectly marked as "Anonymous". This happens due to LiveJournal API call not producing a full list of people, who commented in your journal. There is no way to identify the names of those users via LiveJournal API, so a little bit of human help is required. :)
 
 = 0.97.1 =
 Minor bugfixes with deisplaying Suspended and Deleted comments.

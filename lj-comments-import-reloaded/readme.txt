@@ -40,6 +40,7 @@ Note 3: You should consider removing `Reply` link for imported comments, because
 = 0.98.0 =
 Now works correctly with results of original Wordpress LJ import plugin.
 Added ability to identify livejournal friends incorrectly marked as "Anonymous". This happens due to LiveJournal API call not producing a full list of people, who commented in your journal. There is no way to identify the names of those users via LiveJournal API, so a little bit of human help is required. :)
+Avatars are working correctly: only first user's avatar is supported and avatars are imported only upon first ever import.
 
 = 0.97.1 =
 Minor bugfixes with deisplaying Suspended and Deleted comments.

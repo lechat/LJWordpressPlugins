@@ -17,8 +17,8 @@ function lj_comments_get_avatar($ljusername) {
     mylog("lj_comments_get_avatar: before curl_exec for login");
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $_SERVER['DOCUMENT_ROOT'].'/wp-content/plugins/lj-comments-import-reloaded/cookie.txt'); //get cookie from file
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $_SERVER['DOCUMENT_ROOT'].'/wp-content/plugins/lj-comments-import-reloaded/cookie.txt');
+    curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/lj_comments_import_cookie.txt'); //get cookie from file
+    curl_setopt($ch, CURLOPT_COOKIEJAR, '/tmp/lj_comments_import_cookie.txt');
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5');
     curl_setopt($ch, CURLOPT_URL, 'http://www.livejournal.com/');
@@ -37,6 +37,10 @@ function lj_comments_get_avatar($ljusername) {
     preg_match("/<foaf:img rdf:resource=(.*)\/>/",$page,$matchess);
     mylog('<img src='.$matchess[1].'>');
     $matchess[1] = trim(str_replace('"', '', $matchess[1]));
+    
+    # Delete cookies since we are finished with curl here
+    unlink('/tmp/lj_comments_import_cookie.txt');
+    
     return $matchess[1];
 }
 
@@ -88,8 +92,8 @@ list($first_post_id) = mysql_fetch_row($rez);*/
 mylog("before curl_exec for login");
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-curl_setopt($ch, CURLOPT_COOKIEFILE, $_SERVER['DOCUMENT_ROOT'].'/wp-content/plugins/lj-comments-import-reloaded/cookie.txt'); //get cookie from file
-curl_setopt($ch, CURLOPT_COOKIEJAR, $_SERVER['DOCUMENT_ROOT'].'/wp-content/plugins/lj-comments-import-reloaded/cookie.txt');
+curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/lj_comments_import_cookie.txt'); //get cookie from file
+curl_setopt($ch, CURLOPT_COOKIEJAR, '/tmp/lj_comments_import_cookie.txt');
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.5) Gecko/2008120122 Firefox/3.0.5');
 curl_setopt($ch, CURLOPT_URL, 'http://www.livejournal.com/');
@@ -295,6 +299,9 @@ if ($curr_maxid < $maxid) {
 curl_close($ch);
 
 set_wp_option('lj_comments_last_sync', time());
+
+# Delete cookies since we are finished with curl here
+unlink('/tmp/lj_comments_import_cookie.txt');
 
 mysql_close($db);
 

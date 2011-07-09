@@ -27,15 +27,15 @@ Note 2: Threading depth is limited by WordPress settings (`Settings - Discussion
 Note 3: You should consider removing `Reply` link for imported comments, because they are not really a part of WordPress :).
 
 == Installation ==
-1. Deactivate original LJ comments import plugin first.
-2. Upload archive contents to the `/wp-content/plugins/` directory. You shod have `/wp-content/plugins/lj-comments-import-reloaded` folder after that.
-3. Make file `/wp-content/plugins/lj-comments-import-reloaded/cookie.txt` writeable for everyone.
-4. Fill nine first lines of `sync_lj_comments.php` with settings from Your `wp-config.php`.
-5. Activate the plugin through the `Plugins` menu in WordPress.
-6. Go to `Settings - LJ Comments Import` and enter Your LiveJournal username and password. It's completely safe to enter Your password here - it will be neither stored nor transferred in plain text. LJ Comments Import plugin will encode Your password first using md5 algorithm.
-7. Press the `Sync Livejournal comments now` button to do the initial comments synchronization.
+1. Upload archive contents to the `/wp-content/plugins/` directory. You shod have `/wp-content/plugins/lj-comments-import-reloaded` folder after that.
+2. Activate the plugin through the `Plugins` menu in WordPress.
+3. Go to `Settings - LJ Comments Import` and enter Your LiveJournal username and password. It's completely safe to enter Your password here - it will be neither stored nor transferred in plain text. LJ Comments Import plugin will encode Your password first using md5 algorithm.
+4. Press the `Sync Livejournal comments now` button to do the initial comments synchronization.
 
 == Changelog ==
+
+= 0.99 =
+No longer requires special permissions for cookies.txt
 
 = 0.98.0 =
 Now works correctly with results of original Wordpress LJ import plugin.
